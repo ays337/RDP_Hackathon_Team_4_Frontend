@@ -1,0 +1,146 @@
+
+
+
+body{
+  font-family: "Inter", sans-serif;
+  background-color: rgba(234, 237, 241, 0.89);
+}
+
+/* ------------------------ */
+/* Main Content Containers */
+/* ------------------------ */
+.home-container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.home-grid{
+width: 100% !important;
+justify-content: center;
+flex-wrap: wrap;
+flex-direction: column;
+display: flex;
+background-image: linear-gradient(to bottom, #107cca, #022966 100%);
+margin-top: 6.4rem;
+border-radius: 0.5rem 0.5rem 0rem 0rem;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.button-grid{
+grid-template-columns: 1fr 1fr ;
+row-gap: 8px;
+column-gap: 8px;
+display: grid;
+justify-items: center;
+}
+
+.button-grid.three-btn{
+grid-template-columns: 1fr 1fr 1fr ;
+}
+
+/* ------------------------ */
+/* Main Content  */
+/* ------------------------ */
+.home-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgb(224, 226, 226);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.action-button {
+  background-color: #ffffff;
+  border: 2px solid #d1d5db;
+  border-radius: 3px;
+  padding: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+  color: rgb(70, 69, 69);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  width: 100%;
+  max-width: 200px;
+  font-size: 0.8rem;
+  font-weight:bold;
+}
+
+.action-button:hover {
+  background-color: #e5f0ff;
+  border-color: rgba(57, 144, 216, 0.699);
+  transform: translateY(-2px);
+}
+
+.button-with-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-label {
+  margin-top: 0.2rem;
+  font-size: 0.85rem;
+  color: rgba(172, 171, 171, 0.563);
+  font-weight: 600;
+  font-style: oblique;
+  text-align: center;
+  max-width: 200px;
+}
+
+
+
+/* ------------------------ */
+/* Results Styles */
+/* ------------------------ */
+.results-flex{
+  background-image: linear-gradient(to bottom, #022966, #107cca  100%);
+  display: flex;
+  margin-top: 0.6rem;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  border-radius: 0rem 0rem 0.5rem 0.5rem;
+}
+.results-text {
+  width: 100%;
+  color: rgb(224, 226, 226);
+  display: flex;
+  justify-content: center;
+
+}
+
+.results-text ul {
+  text-align: center;
+  padding-inline-start: 0rem;
+  margin-block-end: 0.2rem;
+  margin-block-start: 0.5rem
+
+}
+
+li{
+  list-style-type: none;
+}
+
+li:not(:last-child) {
+  list-style-type: none;
+  margin-bottom: 0.3rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
