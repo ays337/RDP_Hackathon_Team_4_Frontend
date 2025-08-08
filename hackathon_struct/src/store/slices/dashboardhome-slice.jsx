@@ -16,6 +16,7 @@ const dashboardHomeSlice = createSlice({
     },
     addCurrentTime(state, action) {
       state.previousTimes.push(action.payload.currentTime);
+      console.log("State Current Time:", state.currentTime);
     },
     loadPastTimes(state, action) {
       const { previousTimes } = action.payload;

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { getAllTimes } from "store/thunks/pageTwo-thunk";
 import "common/styles.css";
 import PageTwoGrid from "./components/PageTwoGrid";
-import ShowTimesResult from "./components/ShowTimesResult";
+import ShowTimesButton from "./components/ShowTimesButton";
 
 const PageTwo = () => {
   const dispatch = useDispatch();
@@ -16,11 +16,22 @@ const PageTwo = () => {
   const previousTimes = useSelector(
     (state) => state.pageTwo?.previousTimes || []
   );
+  const previousTimesDB = useSelector(
+    (state) => state.pageTwo?.previousTimesDB || {}
+  );
+
+  const previousTimesDBArray = previousTimesDB
+    .slice()
+    .map((timeEntry) => timeEntry.timestamp);
 
   return (
     <div className="home-container">
       <PageTwoGrid handleShowTimes={setShowTimes} />
-      <ShowTimesResult showTimes={showTimes} previousTimes={previousTimes} />
+      <ShowTimesButton
+        showTimes={showTimes}
+        previousTimes={previousTimesDBArray}
+      />
+      <ShowTimesButton showTimes={showTimes} previousTimes={previousTimes} />
     </div>
   );
 };

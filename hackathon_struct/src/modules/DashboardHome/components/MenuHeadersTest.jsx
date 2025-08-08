@@ -1,14 +1,9 @@
-import AddTimeButton from "./components/AddTimeButton";
-import DashboardHomeGrid from "../../modules/DashboardHome/components/DashboardHomeGrid";
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addCurrentTime } from "store/thunks/dashboardhome-thunk";
-import { getAllTimes } from "store/thunks/dashboardhome-thunk";
-import MenuHeaders2 from "./components/MenuHeadersTest";
-import MenuHeadersSort from "./components/MenuHeadersTestSort";
+import React, { useState } from "react";
+import {} from "react-redux";
+import {} from "store/thunks/dashboardhome-thunk";
+import {} from "store/thunks/dashboardhome-thunk";
 import "common/styles.css";
-
-const MenuHeaders = () => {
+const MenuHeaders2 = () => {
   const mock = [
     {
       ID: "1",
@@ -39,7 +34,7 @@ const MenuHeaders = () => {
     {
       ID: "3",
       Staging: "Early",
-      Destination: "Cleveland",
+      //   Destination: "Cleveland",
       Alerts: "None",
       ExpandedData: {
         ProductNumber: "DO-1015",
@@ -53,7 +48,7 @@ const MenuHeaders = () => {
       ID: "4",
       Staging: "Early",
       Destination: "Chicago",
-      Alerts: "Low days of service",
+      //   Alerts: "Low days of service",
       ExpandedData: {
         ProductNumber: "BQ-1017",
         Pallets: "25",
@@ -64,14 +59,28 @@ const MenuHeaders = () => {
     },
   ];
 
-  const data = mock.slice();
+  const sortedmock = mock.slice().sort((a, b) => Number(b.ID) - Number(a.ID));
+
+  console.log(sortedmock);
+
+  const [expandedRows, setExpandedRows] = useState({});
+  //Create a state to toggle on or off expaded view (Use an object so we can link the rowID with true/false  {rowID:t/f, rowID:t/f ..})
+
+  const toggleRow = (id) => {
+    setExpandedRows((prev) => ({
+      //pass in the expanded rows object as prev
+      ...prev, //spread the expandedRowsobject
+      [id]: !prev[id],
+      //use computed object literal noation to "add" (more of an update) a row ID key and set the value which is prev[id](object[key] = value) to the negation of itself
+      //So essentially spread the state, update the key to the negation
+    }));
+  };
 
   return (
     <table className="tablestyles">
       <thead className="theadstyles">
         <tr className="trheadstyles">
-          {/* need to make these th buttons so that you can click for sorting */}
-          <th className="thheadstyles">Expand</th>
+          <th className="thheadstyles">Select</th>
           <th className="thheadstyles">ID</th>
           <th className="thheadstyles">Staging</th>
           <th className="thheadstyles">Destination</th>
@@ -79,17 +88,20 @@ const MenuHeaders = () => {
         </tr>
       </thead>
       <tbody id="plant-table-body">
-        {data.map((row) => {
-          return (
+        {sortedmock.map((row) => (
+          <>
             <tr className="trbodystyles" key={row.ID}>
               <td className="tdbodyleftstyles">
                 <div className="tdcontentwrapper">
                   <span className="tdcontentspan">
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      checked={expandedRows[row.ID] === true}
+                      onChange={() => toggleRow(row.ID)}
+                    />
                   </span>
                 </div>
               </td>
-
               <td className="tdbodyleftstyles">
                 <div className="tdcontentwrapper">
                   <span className="tdcontentspan">{row.ID}</span>
@@ -97,53 +109,43 @@ const MenuHeaders = () => {
               </td>
               <td className="tdbodyleftstyles">
                 <div className="tdcontentwrapper">
-                  <span className="tdcontentspan">{row.Staging}</span>
+                  <span className="tdcontentspan">{row.Staging ?? "N/A"}</span>
                 </div>
               </td>
               <td className="tdbodyleftstyles">
                 <div className="tdcontentwrapper">
-                  <span className="tdcontentspan">{row.Destination}</span>
+                  <span className="tdcontentspan">
+                    {row.Destination ?? "N/A"}
+                  </span>
                 </div>
               </td>
               <td className="tdbodyleftstyles">
                 <div className="tdcontentwrapper">
-                  <span className="tdcontentspan">{row.Alerts}</span>
+                  <span className="tdcontentspan">{row.Alerts ?? "N/A"}</span>
                 </div>
               </td>
             </tr>
-          );
-        })}
+            {expandedRows[row.ID] && (
+              <tr>
+                <td colSpan={5}>
+                  <div style={{ padding: "10px", backgroundColor: "#f9f9f9" }}>
+                    <strong>Expanded Data:</strong>
+                    <ul style={{ marginTop: "5px" }}>
+                      {Object.entries(row.ExpandedData).map(([key, value]) => (
+                        <li key={key}>
+                          <strong>{key}:</strong> {value}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            )}
+          </>
+        ))}
       </tbody>
     </table>
   );
 };
 
-const DashboardHome = () => {
-  const dispatch = useDispatch();
-  const [showAdd, setShowAdd] = useState(false);
-
-  useEffect(() => {
-    dispatch(getAllTimes());
-  }, [dispatch]);
-
-  const handleAddTime = () => {
-    const currentTime = new Date().toLocaleTimeString();
-    dispatch(addCurrentTime(currentTime));
-    setShowAdd(true);
-  };
-
-  const currentTime = useSelector(
-    (state) => state.dashboardHome?.currentTime || ""
-  );
-
-  return (
-    <div className="home-container">
-      <DashboardHomeGrid onAddTime={handleAddTime} />
-      <AddTimeButton showAdd={showAdd} currentTime={currentTime} />
-      {/* <MenuHeaders2 /> */}
-      <MenuHeadersSort />
-    </div>
-  );
-};
-
-export default DashboardHome;
+export default MenuHeaders2;
