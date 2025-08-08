@@ -141,3 +141,6 @@ These files contain core setup logic, path aliases, and routing logic that may b
 -  You can customize the file structure to fit your project, but the provided layout is optimized for quick development using Vite, React, Redux Toolkit, and Express.
 
 
+Python backend server startup:
+
+Activate virtual environment from within the "RDP_Hackaton_Team_4_Frontend/backend/" folder: `uvicorn main:app --host 0.0.0.0 --port 8000 --reload`
