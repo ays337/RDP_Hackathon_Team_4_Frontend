@@ -21,6 +21,7 @@ export const addCurrentTime = createAsyncThunk(
       await dashboardHomeApi.addCurrentTime(currentTime);
       dispatch(dashboardHomeActions.addCurrentTime({ currentTime }));
       dispatch(dashboardHomeActions.loadCurrentTime({ currentTime }));
+      await dashboardHomeApi.addCurrentTimeDB(currentTime);
     } catch (error) {
       console.error("Error adding time:", error);
     }
