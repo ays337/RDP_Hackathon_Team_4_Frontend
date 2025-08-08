@@ -4,10 +4,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCurrentTime } from "store/thunks/dashboardhome-thunk";
 import { getAllTimes } from "store/thunks/dashboardhome-thunk";
-<<<<<<< HEAD
-import "common/styles.css";
-
-=======
 import MenuHeaders2 from "./components/MenuHeadersTest";
 import MenuHeadersSort from "./components/MenuHeadersTestSort";
 import "common/styles.css";
@@ -122,7 +118,6 @@ const MenuHeaders = () => {
   );
 };
 
->>>>>>> other/main
 const DashboardHome = () => {
   const dispatch = useDispatch();
   const [showAdd, setShowAdd] = useState(false);
@@ -144,13 +139,9 @@ const DashboardHome = () => {
   return (
     <div className="home-container">
       <DashboardHomeGrid onAddTime={handleAddTime} />
-<<<<<<< HEAD
-      <RemoveTimeResult showAdd={showAdd} currentTime={currentTime} />
-=======
       <AddTimeButton showAdd={showAdd} currentTime={currentTime} />
       {/* <MenuHeaders2 /> */}
       <MenuHeadersSort />
->>>>>>> other/main
     </div>
   );
 };
